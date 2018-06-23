@@ -2,6 +2,6 @@ package beans;
 
 public class OrderItem {
 
-	private Item artikal;
-	private int kolicina;
+	private Item item;
+	private int quantity;
 }
