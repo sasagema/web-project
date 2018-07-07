@@ -1,0 +1,121 @@
+[ {
+  "id" : "1",
+  "orderedItems" : [ {
+    "id" : "6",
+    "item" : {
+      "id" : "6",
+      "name" : "Porodicna",
+      "price" : 600.0,
+      "description" : "Sunka, sir, masline",
+      "restaurantId" : "6",
+      "restaurantName" : "Babos",
+      "quantity" : 500,
+      "ordersCounter" : 2,
+      "deleted" : false,
+      "itemType" : "MEAL"
+    },
+    "quantity" : 1
+  } ],
+  "buyerId" : "2",
+  "buyerUsername" : "mika.kupac",
+  "deliveryId" : "3",
+  "deliveryUsername" : "pera.brzi",
+  "orderDate" : "07.07.2018",
+  "orderTime" : "06:09:00",
+  "orderStatus" : "Dostavljeno",
+  "address" : "Strazi",
+  "note" : "Bez origana",
+  "deleted" : false,
+  "totalPrice" : 600.0,
+  "discount" : 0.0
+}, {
+  "id" : "2",
+  "orderedItems" : [ {
+    "id" : "12",
+    "item" : {
+      "id" : "12",
+      "name" : "Koka Kola",
+      "price" : 150.0,
+      "description" : "Gazirani sok",
+      "restaurantId" : "1",
+      "restaurantName" : "Minuta",
+      "quantity" : 330,
+      "ordersCounter" : 1,
+      "deleted" : false,
+      "itemType" : "DRINK"
+    },
+    "quantity" : 1
+  }, {
+    "id" : "7",
+    "item" : {
+      "id" : "7",
+      "name" : "Sarma",
+      "price" : 400.0,
+      "description" : "Kupus, rebarca",
+      "restaurantId" : "1",
+      "restaurantName" : "Minuta",
+      "quantity" : 500,
+      "ordersCounter" : 1,
+      "deleted" : false,
+      "itemType" : "MEAL"
+    },
+    "quantity" : 1
+  } ],
+  "buyerId" : "2",
+  "buyerUsername" : "mika.kupac",
+  "deliveryId" : "3",
+  "deliveryUsername" : "pera.brzi",
+  "orderDate" : "07.07.2018",
+  "orderTime" : "06:10:06",
+  "orderStatus" : "Dostava_u_toku",
+  "address" : "Strazilovska 3",
+  "note" : "Brzo, gladan sam.",
+  "deleted" : false,
+  "totalPrice" : 550.0,
+  "discount" : 0.0
+}, {
+  "id" : "3",
+  "orderedItems" : [ {
+    "id" : "13",
+    "item" : {
+      "id" : "13",
+      "name" : "Fanta",
+      "price" : 150.0,
+      "description" : "Gazirani sok",
+      "restaurantId" : "7",
+      "restaurantName" : "Brena",
+      "quantity" : 330,
+      "ordersCounter" : 1,
+      "deleted" : false,
+      "itemType" : "DRINK"
+    },
+    "quantity" : 1
+  }, {
+    "id" : "3",
+    "item" : {
+      "id" : "3",
+      "name" : "Cevapi 10",
+      "price" : 300.0,
+      "description" : "U lepinji ili u tortilji",
+      "restaurantId" : "7",
+      "restaurantName" : "Brena",
+      "quantity" : 200,
+      "ordersCounter" : 1,
+      "deleted" : false,
+      "itemType" : "MEAL"
+    },
+    "quantity" : 1
+  } ],
+  "buyerId" : "2",
+  "buyerUsername" : "mika.kupac",
+  "deliveryId" : null,
+  "deliveryUsername" : null,
+  "orderDate" : "07.07.2018",
+  "orderTime" : "06:11:00",
+  "orderStatus" : "Poruceno",
+  "address" : "Strazilovska 3",
+  "note" : "Urnebes, luk.",
+  "deleted" : false,
+  "totalPrice" : 450.0,
+  "discount" : 0.0
+} ]
