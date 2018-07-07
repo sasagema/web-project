@@ -13,6 +13,7 @@ public class Restaurant {
 	private List<Item> meals;
 	private List<Item> drinks;
 	private boolean deleted;
+	private int ordersCounter;
 	public Restaurant() {
 		super();
 	}
@@ -68,6 +69,13 @@ public class Restaurant {
 	}
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+	
+	public int getOrdersCounter() {
+		return ordersCounter;
+	}
+	public void setOrdersCounter(int ordersCounter) {
+		this.ordersCounter = ordersCounter;
 	}
 	@Override
 	public String toString() {

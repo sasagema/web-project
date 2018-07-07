@@ -1,5 +1,5 @@
 package enums;
 
 public enum Role {
-	USER, ADMIN, DELIVERY
+	Kupac, Admin, Dostavljac
 }

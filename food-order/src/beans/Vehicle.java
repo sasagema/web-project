@@ -1,5 +1,6 @@
 package beans;
 
+import enums.VehicleStatus;
 import enums.VehicleType;
 
 public class Vehicle {
@@ -9,22 +10,25 @@ public class Vehicle {
 	private String model;
 	private VehicleType vehicleType;
 	private String numberPlate;
-	private int prductionYear;
+	private int productionYear;
 	private boolean occupied;
+	private String occupiedById;
+	private String occupiedByUsername;
 	private String note;
+	private VehicleStatus status;
 	private boolean deleted;
 	public Vehicle() {
 		super();
 	}
 	public Vehicle(String id, String brand, String model, VehicleType vehicleType, String numberPlate,
-			int prductionYear, boolean occupied, String note, boolean deleted) {
+			int productionYear, boolean occupied, String note, boolean deleted) {
 		super();
 		this.id = id;
 		this.brand = brand;
 		this.model = model;
 		this.vehicleType = vehicleType;
 		this.numberPlate = numberPlate;
-		this.prductionYear = prductionYear;
+		this.productionYear = productionYear;
 		this.occupied = occupied;
 		this.note = note;
 		this.deleted = deleted;
@@ -59,11 +63,11 @@ public class Vehicle {
 	public void setNumberPlate(String numberPlate) {
 		this.numberPlate = numberPlate;
 	}
-	public int getPrductionYear() {
-		return prductionYear;
+	public int getProductionYear() {
+		return productionYear;
 	}
-	public void setPrductionYear(int prductionYear) {
-		this.prductionYear = prductionYear;
+	public void setProductionYear(int productionYear) {
+		this.productionYear = productionYear;
 	}
 	public boolean isOccupied() {
 		return occupied;
@@ -86,8 +90,26 @@ public class Vehicle {
 	@Override
 	public String toString() {
 		return "Vehicle [id=" + id + ", brand=" + brand + ", model=" + model + ", vehicleType=" + vehicleType
-				+ ", numberPlate=" + numberPlate + ", prductionYear=" + prductionYear + ", occupied=" + occupied
+				+ ", numberPlate=" + numberPlate + ", productionYear=" + productionYear + ", occupied=" + occupied
 				+ ", note=" + note + ", deleted=" + deleted + "]";
+	}
+	public String getOccupiedById() {
+		return occupiedById;
+	}
+	public void setOccupiedById(String occupiedById) {
+		this.occupiedById = occupiedById;
+	}
+	public String getOccupiedByUsername() {
+		return occupiedByUsername;
+	}
+	public void setOccupiedByUsername(String occupiedByUsername) {
+		this.occupiedByUsername = occupiedByUsername;
+	}
+	public VehicleStatus getStatus() {
+		return status;
+	}
+	public void setStatus(VehicleStatus status) {
+		this.status = status;
 	}
 	
 	

@@ -5,24 +5,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Ubaciti iz lokalnog fajla  -->
+      <link rel="stylesheet" href="css/index.css">
+  
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <script src="js/popper.min.js"></script>
+<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script> -->
+  <script src="js/bootstrap.min.js"></script>
+<!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> -->
   <script src="js/index.js"></script>
+   <script src="js/jquery.form.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script> 
  
   <style>
   .fakeimg {
       height: 200px;
       background: #aaa;
   }
+  .modalProba{
+position: relative;
+    width: 100%;
+    border-right:solid #ff920a 2px;
+    min-height:100px;
+    max-height:400px;
+    height: auto;
+    overflow: auto;
+}
+ .modalProba2{
+position: relative;
+    width: 50%;
+    float:left;
+    border-right:solid #ff920a 2px;
+    height: 150px;
+    overflow: auto;
+}
+textarea { resize:none; }
   </style>
+  <script>
+	$(".categFilter").on('click', function(){
+
+		alert($(this));
+       
+    });
+  </script>
 </head>
 <body>
 
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Food Order</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -30,15 +62,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="http://localhost:8080/food-order/">Pocetna <span class="sr-only">(current)</span></a>
       </li>
       
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
     </ul>
 <!--     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -56,6 +82,9 @@
         </div>
       </li> -->
     <!-- Button trigger modal -->
+    <button  id="navBtnPretraga"  type="button"  class="btn btn-sm mx-2 btn-secondary ">
+  		Pretraga
+	</button>
 	<button  id="navBtnPrijava" style="display: none;" type="button"  class="btn btn-sm mx-2" data-toggle="modal" data-target="#modalPrijava">
   		Prijavi se
 	</button>
@@ -70,29 +99,34 @@
 
 <div class="container" style="margin-top:30px">
   <!-- Panel za korisnika prijavljenog i ne prijavljenog -->
-  <div id = "userPanel">
+  
+  <div id = "userPanel" style="display: none;">
 	  <div class="row">
 	    <div class="col-sm-2">
 	      <h3>Kategorije</h3>
-	      <ul class="nav nav-pills flex-column">
-	        <li class="nav-item">
-	          <a class="nav-link active" href="#">Domaća kuhinja</a>
+	      <ul class="nav nav-pills flex-column" id='categRestFilter'>
+	       	 <li class="nav-item">
+	          <a class="nav-link categFilter active"  id="allCateg" href="#">Sve kategorije</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Roštilj</a>
+	          <a class="nav-link categFilter " id="Domaca_kuhinja" href="#">Domaća kuhinja</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Kineski restoran</a>
+	          <a class="nav-link categFilter" id="Rostilj" href="#">Roštilj</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Indijski restoran</a>
+	          <a class="nav-link categFilter"  id="Kineski_restoran" href="#">Kineski restoran</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Poslasticarnica</a>
+	          <a class="nav-link categFilter"  id="Indijski_restoran" href="#">Indijski restoran</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Picerija</a>
+	          <a class="nav-link categFilter"  id="Poslasticarnica" href="#">Poslasticarnica</a>
 	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link categFilter"  id="Picerija" href="#">Picerija</a>
+	        </li>
+
 	       	
 	      </ul>
 	      <hr class="d-sm-none">
@@ -117,7 +151,7 @@
 	  		<li class="nav-item" id="userOmiljenoTab">
 	   			 <a class="nav-link"  data-toggle="tab" href="#userPorudzbine" role="tab" href="#">Moje porudzbine</a>
 	  		</li>
-
+	  		
 		</ul>
 		<!-- /Tabovi  -->
 	    
@@ -125,7 +159,7 @@
 	    <div class="tab-content" id="userTabContent">
 		  <!-- Svi restorani -->
 		  <div class="tab-pane fade show active" id="userSviRestorani" role="tabpanel" >
-		  	<div class="card mb-2 ">
+<!-- 		  	<div  id='card1' class="card mb-2 ">
 			  	<div class="card-body">
 			    	<h5 class="card-title">Kuca kobasice</h5>
 			    	<button class="btn  float-right">&#10084;</button>						
@@ -141,26 +175,27 @@
 						    </tr>
 						  </tbody>
 						</table>
-			    	<button class="btn btn-primary btn-sm float-right">Pogledaj ponudu</button>			    	
+			    	<button  class="btn btn-primary btn-sm float-right" >Pogledaj ponudu</button>			    	
 				</div>
-			</div>
+			</div> -->
+			
 		  </div>
 		  <!-- Popularni artikli -->
 		  <div class="tab-pane fade" id="userPopularniArtikli" role="tabpanel" >
-		  		<h1>Popularna jela</h1>
-		  		<table class="table">
+
+		  		<table class="table" >
 					<thead>
 						<tr>
-								<th>Naziv</th>
-							    <th>Opis</th>
-							    <th>Cena</th>
-							    <th>Kolicina</th>
-							    <th>Broj porcija</th>
-								<th></th>
+							<th>Naziv</th>
+						    <th>Opis</th>
+						    <th>Cena</th>
+						    <th>Kolicina</th>
+						    <th>Restoran</th>
+							<th></th>
 						</tr>
 					</thead>	    						  
-					 <tbody>
-						<tr>
+					 <tbody id="popularItems">
+						<!-- <tr>
 							<td>Domaca kobaja</td>
 							<td>Ukusna domaca kobaja</td>
 							<td>200</td>
@@ -172,16 +207,16 @@
 						      </td>
 						    <td>
 							  	<div class="btn-group btn-sm" role="group" aria-label="First group">
-								    <button type="button" class="btn btn-primary btn-sm">Naruci</button>
+								    <button type="button" class="btn btn-primary btn-sm ">Naruci</button>
 								</div>
 							</td>
-						</tr>						     
+						</tr>	 -->					     
 				  	</tbody>
 				</table>
 		  </div>
 		  <!-- Omiljeni restorani -->
 		  <div class="tab-pane fade" id="userOmiljeniRestorani" role="tabpanel" >
-		  	<div class="card mb-2 ">
+<!-- 		  	<div class="card mb-2 ">
 			  	<div class="card-body">
 			    	<h3 class="card-title">Kuca kobasice</h3>						
 						<table class="table">
@@ -198,7 +233,7 @@
 						</table>
 			    	<button class="btn btn-primary btn-sm float-right">Pogledaj ponudu</button>		    	
 				</div>
-			</div>
+			</div> -->
 		  </div>
 		<!-- User porudzbine -->
   		<div class="tab-pane fade" id="userPorudzbine" role="tabpanel" >
@@ -211,49 +246,12 @@
 					    <th>Status</th>
 					    <th>Napomena</th>
 					    <th>Cena</th>
+					    <th>Popust</th>
 					    <th>Artikli</th>
 					</tr>
 			    </thead>
-				<tbody>
+				<tbody id="userOrdersTable">
 
-				    <tr>
-				      <td>12</td>
-				      <td>12.6.2018 15:00</td>
-				      <td>Pera dostavljac</td>
-				      <td>Status porudzbine</td>
-				      <td>Neka napomena</td>
-				      <th>1000</th>
-				      <td>
-				      	<div class="dropdown">
-						  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
-						    Artikli
-						  </button>
-						  <div class="dropdown-menu">
-						    <table class="table table-sm dropdown-item">
-								<thead>
-    								<tr>		
-										<th>Naziv</th>
-									    <th>Kolicina</th>
-									    <th>Restoran</th>
-							  		</tr>
-							  	</thead>
-							  	<tbody>
-								  	<tr>
-								  		<td>Artikal 1</td>
-								  		<td>3</td>
-								  		<td>Restoran 1</td>
-								  	</tr>
-								  	<tr>
-								  		<td>Artikal 2</td>
-								  		<td>2</td>
-								  		<td>Restoran 2</td>
-								  	</tr>
-								</tbody>
-							</table>  	
-						  </div>
-						</div>
-				      </td>
-				    </tr>
 				  </tbody>
 				</table>
   			</div>			
@@ -263,10 +261,10 @@
 	    <!-- /Desni deo velicine 10  --> 
    </div>
     	<!-- <div class="row"> -->
- 	</div>
+ </div>
 	<!-- /Panel za korisnika prijavljenog i ne prijavljenog -->
 	
-	<div id = "adminPanel">
+	<div id = "adminPanel" style="display: none;">
 	  <div class="row">
 	    <div class="col-sm-2">
 	      <h3>Admin</h3>
@@ -303,6 +301,10 @@
 		  			<li class="nav-item">
 		   			 <a class="nav-link" data-toggle="tab" href="#adminKorisnici" role="tab" >Korisnici</a>
 		  		</li>
+		  		<li>
+		  			<li class="nav-item">
+		   			 <a class="nav-link" data-toggle="tab" href="#adminPorudzbine" role="tab" >Porudzbine</a>
+		  		</li>
 	
 			</ul>
 			<!-- /Tabovi  -->
@@ -310,7 +312,7 @@
 	   		<div class="tab-content" id="adminTabContent">
 				<!-- Svi restorani admin -->
 		  		<div class="tab-pane fade show active" id="adminRestorani" role="tabpanel" >
-		  			<table class="table">
+		  			<table class="table  table-sm" >
 		  				<thead>
 		  					<tr>
 								<th>Naziv</th>
@@ -320,88 +322,32 @@
 							    <th></th>
 						  	</tr>
 						</thead>
-						<tbody>
+						<tbody id='adminRestTable'>
 
-						    <tr>
-						      <td>Kuca kobasice</td>
-						      <td>Руменачка 33</td>
-						      <td>Domaca kuhinja</td>
-						      <td>
-						      	<div class="dropdown">
-								  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
-								    Artikli
-								  </button>
-								  <div class="dropdown-menu">
-								    <ol class="dropdown-item">
-								    	<li>Artikal 1</li>
-								    	<li>Artikal 2</li>
-								    	<li>Artikal 3</li>
-								    </ol>
-								  </div>
-								</div>
-						      </td>
-						      <td>
-						      	<div class="btn-group btn-sm" role="group" aria-label="First group">
-								    <button type="button" class="btn btn-primary btn-sm">Izmeni</button>
-								    <button type="button" class="btn btn-danger btn-sm">Izbrisi</button>
-								  </div>
-						      </td>
-						    </tr>
-						     <tr>
-						      <td>Kuca kobasice 2</td>
-						      <td>Руменачка 332</td>
-						      <td>Domaca kuhinja</td>
-						      <td>Neki Artikli</td>
-						    </tr>
 						    
 						  </tbody>
 					</table>
 		  		
 		  		</div>
 		  		<div class="tab-pane fade " id="adminArtikli" role="tabpanel" >
-		  			<h1>Artikli</h1>
-		  			<table class="table">
+		  			<table class="table table-sm" >
 		  				<thead>
 		  					<tr>
 								<th>Naziv</th>
 							    <th>Opis</th>
 							    <th>Cena</th>
 							    <th>Kolicina</th>
+							    <th>Restoran</th>
 								<th></th>
 						   	</tr>
 						</thead> 						  
-					  	<tbody>
+					  	<tbody id='adminItemTable'>
 
-						    <tr>
-						      <td>Domaca kobaja</td>
-						      <td>Ukusna domaca kobaja</td>
-						      <td>200</td>
-						      <td>200</td>
-						      <td>
-						      	<div class="btn-group btn-sm" role="group" aria-label="First group">
-								    <button type="button" class="btn btn-primary btn-sm">Izmeni</button>
-								    <button type="button" class="btn btn-danger btn-sm">Izbrisi</button>
-								  </div>
-						      </td>
-						    </tr>						     
-						   	<tr>
-						      <td>Ljuta kobaja</td>
-						      <td>Ukusna ljuta kobaja</td>
-						      <td>250</td>
-						      <td>200</td>
-						      <td>
-						      	<div class="btn-group btn-sm" role="group" aria-label="First group">
-								    <button type="button" class="btn btn-primary btn-sm">Izmeni</button>
-								    <button type="button" class="btn btn-danger btn-sm">Izbrisi</button>
-								  </div>
-						      </td>
-						    </tr> 
 						</tbody>
 					</table>
 		  		</div>
 		  		<div class="tab-pane fade " id="adminVozila" role="tabpanel" >
-		  			<h1>Vozila</h1>
-		  			<table class="table">
+		  			<table class="table table-sm" >
 		  				<thead>
 		  					<tr>
 								<th>Marka</th>
@@ -414,31 +360,12 @@
 							    <th></th>
 							</tr>
 						</thead>
-						<tbody>
-
-						    <tr>
-						      <td>Fiat</td>
-						      <td>Punto</td>
-						      <td>NS-555-SR</td>
-						      <td>2001</td>
-						      <td>Automobil</td>
-						      <td>Slobodan</td>
-						      <td>Nece u trecu brzinu.</td>
-						      <td>
-						      	<div class="btn-group btn-sm" role="group" >
-								    <button type="button" class="btn btn-primary btn-sm">Izmeni</button>
-								    <button type="button" class="btn btn-danger btn-sm">Izbrisi</button>
-								  </div>
-						      </td>
-						    </tr>
-						   
-						    
-						  </tbody>
+						<tbody id='adminVehicleTable'>				    	    
+						</tbody>
 					</table>		  			
 		  		</div>
 		  		<div class="tab-pane fade " id="adminKorisnici" role="tabpanel" >
-		  			<h1>Korisnici</h1>
-		  			<table class="table">
+		  			<table class="table table-sm">
 		  				<thead>
 		  					<tr>
 								<th>Ime i Prez.</th>
@@ -451,24 +378,92 @@
 							    <th></th>
 							</tr>
 						</thead>  
-						<tbody>
-						    <tr>
-						      <td>Pera Peric</td>
-						      <td>064123123</td>
-						      <td>pera@pera.com</td>
-						      <td>pera123</td>
-						      <td>Kupac</td>
-						      <td>12.5.2016</td>
-						      <td>2</td>
-						      <td>
-						      	<div class="btn-group btn-sm" role="group" aria-label="First group">
-								    <button type="button" class="btn btn-primary btn-sm">Izmeni tip</button>
-								  </div>
-						      </td>
-						    </tr>
-						     					    
-						  </tbody>
+						<tbody  id='adminUserTable'>					    
+     					    
+						</tbody>
 					</table>
+		  		</div>
+				<div class="tab-pane fade " id="adminPorudzbine" role="tabpanel" >
+		  				<table class="table">
+									<thead>
+										<tr>
+											<th>Br. por.</th>
+										    <th>Dat. i vr.</th>
+										    <th>Kupac</th>
+										    <th>Adresa</th>
+											<th>Artikli</th>
+										    <th>Status</th>
+										    <th>Napomena</th>
+										    <th>Cena</th>
+										    <th>Dostavlj</th>
+										    <th></th>
+										</tr>
+								    </thead>
+								<tbody id="adminOrderTable">
+								</tbody>
+							</table>
+<!-- 
+			 		  	<div  id='card1' class="card mb-2 ">
+					  	<div class="card-body">			
+								<h5>Porudzbina</h5>
+								
+							<h5>Kupac</h5>
+								<table class="table table-sm">
+									<thead>
+					  					<tr>
+											<th>Ime i Prez.</th>
+										    <th>Telefon</th>
+										    <th>Email</th>
+										    <th>Kor. ime</th>
+										    <th>Tip kor.</th>
+										    <th>Dat. reg.</th>
+										    <th>Br. bodova</th>
+										    <th></th>
+										</tr>
+									</thead>  
+									<tbody  id='adminOrderUserTable'>					    
+	     					    
+									</tbody>								
+							</table>
+							<h5>Dostavljac</h5>
+								<table class="table table-sm">
+									<thead>
+						  					<tr>
+												<th>Ime i Prez.</th>
+											    <th>Telefon</th>
+											    <th>Email</th>
+											    <th>Kor. ime</th>
+											    <th>Tip kor.</th>
+											    <th>Dat. reg.</th>
+											    <th>Br. bod.</th>
+											    <th></th>
+											</tr>
+									</thead>  
+										<tbody  id='adminOrderDostTable'>					    
+		     					    
+										</tbody>
+								</table>
+							<h5>Vozilo</h5>
+								<table class="table table-sm">
+									<thead>
+					  					<tr>
+											<th>Marka</th>
+										    <th>Model</th>
+										    <th>Reg. Ozn.</th>
+										    <th>God. Pro.</th>
+										    <th>Tip voz.</th>
+										    <th>Status</th>
+										    <th>Napomena</th>
+										    <th></th>
+										</tr>
+									</thead>
+									<tbody id='adminOrderVehicleTable'>				    	    
+									</tbody>
+								</table> 
+					    	<button  class="btn btn-primary btn-sm float-right" >Izmeni</button>
+					    	<button  class="btn btn-danger btn-sm float-right" >Izbrisi</button>			    	
+						</div>-->
+					</div>
 		  		</div>
 		  	</div>	
 	    </div>
@@ -477,61 +472,32 @@
       <!-- <div class="row"> -->
 	</div>
 	  <!-- Panel za dostavljaca -->
-  <div id = "dostavljacPanel">
+  <div id = "dostavljacPanel" style="display: none;">
 	  <div class="row">
 	    <div class="col-sm-2">
 	      <h3>Dostavljac</h3>
-	      <ul class="nav nav-pills flex-column">
-	        <li class="nav-item">
-	          <a class="nav-link active" href="#">Domaća kuhinja</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="#">Roštilj</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="#">Kineski restoran</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="#">Indijski restoran</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="#">Poslasticarnica</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="#">Picerija</a>
-	        </li>
-	       	
-	      </ul>
 	      <hr class="d-sm-none">
-	    </div>
-	    
-	
-	    
+	    </div>    
 	    <!-- Desni deo  -->
 	    <div class="col-sm-10">
 	    
 	    <!-- Tabovi  -->
 	    <ul class="nav nav-tabs mb-2">
 	 		 <li class="nav-item">
-	 		 	<a class="nav-link active" data-toggle="tab" href="#dostavljacPorudzbine" role="tab" href="#">Porudzbine</a>
+	 		 	<a class="nav-link active" data-toggle="tab" href="#dostPorudzbine" role="tab">Porudzbine</a>
 	 		 </li>
 	  		<li class="nav-item">
-	   			 <a class="nav-link"  data-toggle="tab" href="#" role="tab" href="#">Popularno</a>
-	  		</li>
-	  		<li class="nav-item" id="userPorudzbineTab">
-	   			 <a class="nav-link"  data-toggle="tab" href="#" role="tab" href="#">Omiljeni restorani</a>
-	  		</li>
-	  		<li class="nav-item" id="userOmiljenoTab">
-	   			 <a class="nav-link"  data-toggle="tab" href="#" role="tab" href="#">Moje porudzbine</a>
+	   			 <a class="nav-link"  data-toggle="tab" href="#dostPreuzPorudzbine" role="tab" >Preuzete porudzbine</a>
 	  		</li>
 
 		</ul>
 		<!-- /Tabovi  -->
 	    
 	    <!-- Sadrzaj tabova za dostavljaca  -->
-	    <div class="tab-content" id="userTabContent"> 
+	    <!-- Tab sa porudzbinama koje nemaju dostavljaca -->
+	    <div class="tab-content" id="dostTabContent"> 
 			<!-- Dostavljac porudzbine -->
-	  		<div class="tab-pane fade show active" id="dostavljacPorudzbine" role="tabpanel" >
+	  		<div class="tab-pane fade show active" id="dostPorudzbine" role="tabpanel" >
 	  			<table class="table table-sm">
 					<thead>
 						<tr>
@@ -539,70 +505,211 @@
 						    <th>Dat. i vr.</th>
 						    <th>Kupac</th>
 						    <th>Adresa</th>
+							<th>Artikli</th>
 						    <th>Status</th>
 						    <th>Napomena</th>
 						    <th>Cena</th>
-						    <th>Artikli</th>
 						    <th></th>
 						</tr>
 				    </thead>
-					<tbody>
-	
-					    <tr>
-					      <td>12</td>
-					      <td>12.6.2018 15:00</td>
-					      <td>Pera</td>
-					      <td>Adresa 12</td>
-					      <td>Status porudzbine</td>
-					      <td>Neka napomena</td>
-					      <td>1000</td>
-					      <td>
-					      	<div class="dropdown">
-							  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
-							    Artikli
-							  </button>
-							  <div class="dropdown-menu">
-							    <table class="table table-sm dropdown-item">
-									<thead>
-	    								<tr>		
-											<th>Naziv</th>
-										    <th>Kolicina</th>
-										    <th>Restoran</th>
-								  		</tr>
-								  	</thead>
-								  	<tbody>
-									  	<tr>
-									  		<td>Artikal 1</td>
-									  		<td>3</td>
-									  		<td>Restoran 1</td>
-									  	</tr>
-									  	<tr>
-									  		<td>Artikal 2</td>
-									  		<td>2</td>
-									  		<td>Restoran 2</td>
-									  	</tr>
-									</tbody>
-								</table>  	
-							  </div>
-							</div>
-					      </td>
-					      <td>
-					      	<div class="btn-group btn-sm" role="group" aria-label="First group">
-							    <button type="button" class="btn btn-primary btn-sm">Preuzmi</button>
-							  </div>
-						  </td>
-					    </tr>
+					<tbody id="dostOpenOrdersTable">
+					 </tbody>
+					</table>
+	  			</div>			
+			<!-- Preuzete porudzbine -->
+	  		<div class="tab-pane fade show" id="dostPreuzPorudzbine" role="tabpanel" >
+	  			<table class="table table-sm">
+					<thead>
+						<tr>
+							<th>Br. por.</th>
+						    <th>Dat. i vr.</th>
+						    <th>Kupac</th>
+						    <th>Adresa</th>
+						    <th>Artikli</th>
+						    <th>Status</th>
+						    <th>Napomena</th>
+						    <th>Cena</th>
+						    <th></th>
+						</tr>
+				    </thead>
+					<tbody id="dostMyOrdersTable">
 					  </tbody>
 					</table>
 	  			</div>			
+			
+			
 			</div>
-			<!-- /Sadrzaj tabova za dostavljaca  -->			
+	    <!-- Tab sa preuzetim porudzbinama  -->
+			
+					
 	 </div>
 	    <!-- /Desni deo velicine 10  --> 
    </div>
     	<!-- <div class="row"> -->
  	</div>
 	<!-- /Panel za dostavljaca -->
+ 	
+ 	<!--  Panel za pretragu -->
+ 	<div id = "searchPanel" style="display: none;">
+	  <div class="row">
+	    <div class="col-sm-2">
+	      <h3>Pretraga</h3>
+	      <hr class="d-sm-none">
+	    </div>
+	    <!-- Desni deo  -->
+	    <div class="col-sm-10">
+	    
+	    <!-- Tabovi  -->
+	    <ul class="nav nav-tabs mb-2">
+	 		 <li class="nav-item">
+	 		 	<a class="nav-link active" data-toggle="tab" href="#searchRestorani" role="tab" href="#">Restorani</a>
+	 		 </li>
+	  		<li class="nav-item">
+	   			 <a class="nav-link"  data-toggle="tab" href="#searchArtikli" role="tab" href="#">Artikli</a>
+	  		</li>	  		
+		</ul>
+		<!-- /Tabovi  -->
+	    
+	    <!-- Sadrzaj tabova za pretragu  -->
+	    <div class="tab-content" id="searchTabContent">
+		  <!-- Svi restorani -->
+		  <div class="tab-pane fade show active" id="searchRestorani" role="tabpanel" >
+		  	
+		  	<div class="card mb-2 ">
+			  	<div class="card-body">
+			  		<form id="formaPretragaRest" action="POST">
+					  <div class="form-row">
+					    <div class="col">
+					      <input type="text" class="form-control" name="restName" placeholder="Naziv">
+					    </div>
+					    <div class="col">
+					      <input type="text" class="form-control" name="restAddress" placeholder="Adresa">
+					    </div>
+					    <div class="col">
+					      <select class="custom-select mr-sm-2" name="restCateg" id="inlineFormCustomSelect">
+					        <option selected value="-1" >Tip..</option>
+					        <option value="0">Domaca kuhinja</option>
+					        <option value="1">Rostilj</option>
+					        <option value="2">Kineski restoran</option>
+					        <option value="3">Indijski restoran</option>
+					        <option value="4">Poslasticarnica</option>
+					        <option value="5">Picerija</option>
+					      </select>
+					    </div>
+					    <div class="col">
+					      <button type="submit" class="btn btn-primary" id="searchRestBtn">Pronadji</button>
+					    </div>
+					  </div>
+					</form>
+			    	<!-- <form id="formaRegistracija" class="form-horizontal" data-toggle="validator"  method="POST" >
+					<div class="form-group row">
+						<label for="inputIme">Naziv</label>
+						<input type="text" class="form-control" id="inputIme"  name="inputIme" placeholder="Unesite ime">
+  					
+				
+    					<label for="inputPrezime">Adresa</label>
+    					<input type="text" class="form-control" id="inputPrezime" name="inputPrezime" placeholder="Unesite prezime">
+  					
+  					
+					    <label for="inputTelefon">Kategorija</label>
+					    <input type="text" class="form-control" id="inputTelefon"  name="inputTelefon" placeholder="Unesite broj telefona">
+				  	</div>  	    
+					<br>
+      				<button class="btn btn-lg btn-primary btn-block" type="submit">Posalji</button>
+
+				</form>		     -->	
+				</div>
+			</div>
+			<div id="searchRestResult">
+			
+			</div>
+		  		
+		  
+<!-- 		  	
+			<div  id='card1' class="card mb-2 ">
+			  	<div class="card-body">
+			    	<h5 class="card-title">Kuca kobasice</h5>
+			    	<button class="btn  float-right">&#10084;</button>						
+						<table class="table">
+						  <tbody>
+						    <tr>
+						      <td>Adresa:</td>
+						      <td>Руменачка 33</td>
+						    </tr>
+						    <tr>
+						      <td>Kategorija:</td>
+						      <td>Rostilj</td>
+						    </tr>
+						  </tbody>
+						</table>
+			    	<button  class="btn btn-primary btn-sm float-right" >Pogledaj ponudu</button>			    	
+				</div>
+			</div> -->
+			
+		  </div>
+		  <!-- Pretraga artikli -->
+		  <div class="tab-pane fade" id="searchArtikli" role="tabpanel" >
+			<div class="card mb-2 ">
+			  	<div class="card-body">
+			  		<form id="formaPretragaItem" action="POST">
+					  <div class="form-row">
+					    <div class="col">
+					      <input type="text" class="form-control" name="itemName" placeholder="Naziv">
+					    </div>
+					    <div class="col col-md-2">
+					      <select class="custom-select mr-sm-2" name="itemType" id="itemType">
+					        <option selected value="-1">Tip...</option>
+					        <option value="0">Jelo</option>
+					        <option value="1">Pice</option>
+					      </select>
+					    </div>
+					    </div>
+					    <br>
+					    <div class="form-row">
+					    <div class="col ">
+					       <input type="number" class="form-control" name="itemPriceMin" value="0" placeholder="Cena od">
+					    </div>
+						<div class="col ">
+					       <input type="number" class="form-control" name="itemPriceMax" value="0" placeholder="Cena do">
+					    </div>
+					    <div class="col col-auto">
+					      <select class="custom-select mr-sm-2" name="itemRestId" id="itemSearchRestId">
+					        <option selected value="-1">Restoran...</option>
+
+					      </select>
+					    </div>
+					    <div class="col">
+					    	 <button type="submit" class="btn btn-primary float-right" id="searchItemBtn">Pronadji</button>
+					    </div>
+					  </div>
+					  
+					</form>
+				</div>
+			</div>
+		  
+		  	<table class="table table-sm" >
+					<thead>
+						<tr>
+							<th>Naziv</th>
+						    <th>Opis</th>
+						    <th>Cena</th>
+						    <th>Kolicina</th>
+						    <th>Restoran</th>
+							<th></th>
+						</tr>
+					</thead>	    						  
+					 <tbody id="searchItemResult">
+					 </tbody>
+			</table>
+		
+		</div>
+		</div>
+		<!-- /Sadrzaj tabova za usera  -->			
+	 </div>
+	    <!-- /Desni deo velicine 10  --> 
+   </div>
+    	<!-- <div class="row"> -->
+ </div>
 </div>
 <!-- Container -->    
     
@@ -625,15 +732,16 @@
 	    <form id="formaPrijava">
   			<div class="form-group">
     			<label for="inputPrijavaKorIme">Korisnicko ime</label>
-    			<input type="text" class="form-control"   name="inputPrijavaKorIme" id="inputPrijavaKorIme"  placeholder="Unesite korisnicko ime">
+    			<input type="text" class="form-control"   name="inputPrijavaKorIme" id="inputPrijavaKorIme"  placeholder="Unesite korisnicko ime" required>
   			</div>
   			<div class="form-group">
     			<label for="inputPrijavaLozinka">Lozinka</label>
-    			<input type="password" class="form-control" name="inputPrijavaLozinka" id="inputPrijavaLozinka" placeholder="Password">
+    			<input type="password" class="form-control" name="inputPrijavaLozinka" id="inputPrijavaLozinka" placeholder="Unsite lozinku" required>
   			</div>
+  			<p id="errorLog" style="color:red;"></p>
   			<br>
       		<button class="btn btn-lg btn-primary btn-block" type="submit">Prijava</button>
-      		<button class="btn  btn-block" type="submit">Registracija</button>
+      		<!-- <button class="btn  btn-block" data-toggle="modal" data-target="#modalRegistracija">Registracija</button> -->
 		</form>
       </div>
     </div>
@@ -655,32 +763,32 @@
        			 </button>
 			</div>
       		<div class="modal-body">
- 	    		<form id="formaRegistracija" class="form-horizontal" data-toggle="validator"  method="POST" >
+ 	    		<form id="formaRegistracija" class="form-horizontal" role="form"  method="POST" >
 					<div class="form-group">
 						<label for="inputIme">Ime</label>
-						<input type="text" class="form-control" id="inputIme"  name="inputIme" placeholder="Unesite ime">
+						<input type="text" class="form-control" pattern="([A-Z][a-z]{2,20})" title="3-20 karaktera" id="inputIme"  name="inputIme" placeholder="Unesite ime" required>
   					</div>
 					<div class="form-group">
     					<label for="inputPrezime">Prezime</label>
-    					<input type="text" class="form-control" id="inputPrezime" name="inputPrezime" placeholder="Unesite prezime">
+    					<input type="text" class="form-control" pattern="([A-Z][a-z]{2,20})" title="3-20 karaktera" id="inputPrezime" name="inputPrezime" placeholder="Unesite prezime" required>
   					</div>
   					<div class="form-group">
 					    <label for="inputTelefon">Kontakt telefon</label>
-					    <input type="text" class="form-control" id="inputTelefon"  name="inputTelefon" placeholder="Unesite broj telefona">
+					    <input type="text" class="form-control" pattern="([0-9]{2,20})" title="3-20 cifara" id="inputTelefon"  name="inputTelefon" placeholder="Unesite broj telefona" required>
 				  	</div>  	    
 				  	<div class="form-group">
 					    <label for="inputEmail">Email address</label>
-					    <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Unesite broj telefona">
+					    <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Unesite email adresu" required>
 				  	</div>
 				  	<div class="form-group">
 					    <label for="inputKorIme">Korisnicko ime</label>
-					    <input type="text" class="form-control" id="inputKorIme"  name="inputKorIme" placeholder="Unesite korisnicko ime">
+					    <input type="text" class="form-control" pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="8-20 karaktera" id="inputKorIme"  name="inputKorIme" placeholder="Unesite korisnicko ime" required>
 				  	</div> 
 				  	<div class="form-group">
 					    <label for="inputLozinka1">Lozinka</label>
-					    <input type="password" class="form-control" id="inputLozinka" name="inputLozinka"placeholder="Unesite lozinku">
+					    <input type="password" class="form-control" pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="8-20 karaktera" id="inputLozinka" name="inputLozinka"placeholder="Unesite lozinku" required>
 				  	</div>
-				  	<p id="error" style="color:red;"></p>
+				  	<p id="errorReg" style="color:red;"></p>
 					<br>
       				<button class="btn btn-lg btn-primary btn-block" type="submit">Posalji</button>
 
@@ -702,18 +810,21 @@
        			 </button>
 			</div>
       		<div class="modal-body">
- 	    		<form id="formNoviRestoran" class="form-horizontal" data-toggle="validator"  method="POST" >
+ 	    		<form id="formNoviRestoran" class="form-horizontal" action="/restaurant" role="form"   method="POST" >
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="idRest"  name="id" >
+  					</div>
 					<div class="form-group">
 						<label for="inputRestIme">Naziv</label>
-						<input type="text" class="form-control" id="inputRestIme"  name="inputRestNaziv" placeholder="Unesite naziv">
+						<input type="text" class="form-control" pattern="^[A-Z0-9].[A-Za-z0-9\s]{0,30}" title="2-30 karaktera" id="inputRestIme"  name="name" placeholder="Unesite naziv" required>
   					</div>
 					<div class="form-group">
     					<label for="inputRestAdresa">Adresa</label>
-    					<input type="text" class="form-control" id="inputRestAdresa" name="inputRestAdresa" placeholder="Unesite adresu">
+    					<input type="text" class="form-control" pattern="^[A-Z].[A-Za-z0-9\s]{0,30}" title="2-30 karaktera" id="inputRestAdresa" name="address" placeholder="Unesite adresu" required>
   					</div>
   					<div class="form-group">
 					    <label for="selectKategRest">Kategorija restorana</label>
-					    <select class="form-control" id="selectKategRest">
+					    <select class="form-control" id="selectKategRest" name="restCateg">
 					      <option value="0">Domaca kuhinja</option>
 					      <option value="1">Rostilj</option>
 					      <option value="2">Kineski restoran</option>
@@ -722,31 +833,10 @@
 					      <option value="5">Picerija</option>
 					    </select>
 					</div>
-					<div class="form-group mb-2">
-					  <label for="inputRestJela">Dodajte jela</label>
-					  <select class="custom-select" id="inputRestJela">
-					    <option value="1">Jelo 1</option>
-					    <option value="2">Jelo 2</option>
-					    <option value="3">Jelo 3</option>
-					  </select>
-					  <div class="input-group-append">
-					    <button class="btn btn-outline-secondary" type="button">Dodaj</button>
-					  </div>
-					</div>
-					<div class="form-group mb-2">
-					  <label for="inputRestPica">Dodajte pica</label>
-					  <select class="custom-select" id="inputRestPica">
-					    <option value="1">Pice 1</option>
-					    <option value="2">Pice 2</option>
-					    <option value="3">Pice 3</option>
-					  </select>
-					  <div class="input-group-append">
-					    <button class="btn btn-outline-secondary" type="button">Dodaj</button>
-					  </div>
-					</div>
-				  	<p id="error" style="color:red;"></p>
+
+				  	<p id="inputRestError" style="color:red;"></p>
 					<br>
-      				<button class="btn btn-lg btn-primary btn-block" type="submit">Posalji</button>
+      				<button class="btn btn-lg btn-primary btn-block submitNoviRestoran" type="submit" id="submitNoviRestoran" type="button">Posalji</button>
 
 				</form>
 			</div>
@@ -765,33 +855,42 @@
        			 </button>
 			</div>
       		<div class="modal-body">
- 	    		<form id="formNoviArtikal" class="form-horizontal" data-toggle="validator"  method="POST" >
+ 	    		<form id="formNoviArtikal" class="form-horizontal" action="/item" role="form" method="POST" >
 					<div class="form-group">
-						<label for="inputNazivArt">Naziv</label>
-						<input type="text" class="form-control" id="inputNazivArt"  name="inputNazivArt" placeholder="Unesite naziv">
+						<input type="hidden" class="form-control" id="idItem"  name="id" >
   					</div>
 					<div class="form-group">
-    					<label for="inputRestAdresa">Opis</label>
-    					<input type="text" class="form-control" id="inputOpisArt" name="inputOpisArt" placeholder="Unesite opis">
+						<label for="inputNazivArt">Naziv</label>
+						<input type="text" class="form-control" pattern="^[A-Z0-9].[A-Za-z0-9\s]{0,30}" title="2-30 karaktera"  id="inputNazivArt"  name="name" placeholder="Unesite naziv" required>
+  					</div>
+					<div class="form-group">
+    					<label for="inputOpisArt">Opis</label>
+    					<input type="text" class="form-control" min="1" max="200" title="2-100 karaktera"  id="inputOpisArt" name="description" placeholder="Unesite opis" required>
   					</div>
   					<div class="form-group">
     					<label for="inputCenaArt">Cena</label>
-    					<input type="number" class="form-control" id="inputCenaArt" name="inputCenaArt" placeholder="Unesite cenu">
+    					<input type="number" class="form-control" min="0" max="10000" id="inputCenaArt" name="price" placeholder="Unesite cenu" required>
   					</div>
   					<div class="form-group">
 					    <label for="selectKategArt">Tip artikla</label>
-					    <select class="form-control" id="selectKategArt">
+					    <select class="form-control" name="itemType" id="selectKategArt">
 					      <option value="0">Jelo</option>
 					      <option value="1">Pice</option>
 					    </select>
 					</div>
+					<div class="form-group">
+					    <label for="selectRestaurant">Restoran</label>
+					    <select class="form-control" name="restaurantId" id="selectRestaurantId">
+					      <option value="0">RESTORAN</option>		
+					    </select>
+					</div>
   					<div class="form-group">
     					<label for="inputKolArt">Kolicina</label>
-    					<input type="number" class="form-control" id="inputKolArt" name="inputKolArt" placeholder="Unesite kolicinu">
+    					<input type="number" class="form-control" min="1" max="10000" id="inputKolArt" name="quantity" placeholder="Unesite kolicinu" required>
   					</div>
-				  	<p id="error" style="color:red;"></p>
+				  	<p id="inputArtikalError" style="color:red;"></p>
 					<br>
-      				<button class="btn btn-lg btn-primary btn-block" type="submit">Posalji</button>
+      				<button class="btn btn-lg btn-primary btn-block" id="submitNoviArtikal" type="submit" >Posalji</button>
 
 				</form>
 			</div>
@@ -810,22 +909,25 @@
        			 </button>
 			</div>
       		<div class="modal-body">
- 	    		<form id="formaNovoVozilo" class="form-horizontal" data-toggle="validator"  method="POST" >
+ 	    		<form id="formNovoVozilo" class="form-horizontal" action="/vehicle" role="form" method="POST" >
 					<div class="form-group">
-						<label for="inputVozMarka">Marka</label>
-						<input type="text" class="form-control" id="inputVozMarka"  name="inputVozMarka" placeholder="Unesite marku vozila">
+						<input type="hidden" class="form-control" id="idVehicle"  name="id" >
   					</div>
 					<div class="form-group">
-    					<label for="inputRestAdresa">Opis</label>
-    					<input type="text" class="form-control" id="inputOpis" name="inputPrezime" placeholder="Unesite model vozila">
+						<label for="inputVozMarka">Marka</label>
+						<input type="text" class="form-control" pattern="^[A-Z].[A-Za-z0-9\s]{0,30}" title="2-30 karaktera" id="inputVozMarka"  name="brand" placeholder="Unesite marku vozila" required>
+  					</div>
+					<div class="form-group">
+    					<label for="inputVozModel">Model</label>
+    					<input type="text" class="form-control" pattern="^[A-Z].[A-Za-z0-9\s]{0,30}" title="2-30 karaktera"  id="inputVozModel" name="model" placeholder="Unesite model vozila" required>
   					</div>
   					<div class="form-group">
     					<label for="inputGodVoz">Godiste</label>
-    					<input type="number" class="form-control" id="inputGodVoz" name="inputGodVoz" placeholder="Unesite godinu proizvodnje">
+    					<input type="number" class="form-control" min="1930" max="2018" id="inputGodVoz" name="productionYear" placeholder="Unesite godinu proizvodnje" required>
   					</div>
   					<div class="form-group">
 					    <label for="selectTipVoz">Tip vozila</label>
-					    <select class="form-control" id="selectTipVoz">
+					    <select class="form-control" name='vehicleType' id="selectTipVoz">
 					      <option value="0">Bicikl</option>
 					      <option value="1">Skuter</option>
 					      <option value="2">Automobil</option>
@@ -833,15 +935,15 @@
 					</div>
 					<div class="form-group">
     					<label for="inputRegVoz">Registarski broj</label>
-    					<input type="text" class="form-control" id="inputRegVoz" name="inputRegVoz" placeholder="Unesite registraciju vozila">
+    					<input type="text" class="form-control" pattern="[A-Za-z0-9\s]{0,30}" title="Primer: NS123AB Za bicikl unestite bilo sta." id="inputRegVoz" name="numberPlate" placeholder="Unesite registraciju vozila" required>
   					</div>
   					<div class="form-group">
 					  <label for="inputNapVoz">Napomena</label>
-					  <textarea id="inputNapVoz" class="form-control" aria-label="With textarea"></textarea>
+					  <textarea id="inputNapVoz" class="form-control" name='note' aria-label="With textarea"></textarea>
 					</div>
-									  	<p id="error" style="color:red;"></p>
+					<p id="inputVozError" style="color:red;"></p>
 					<br>
-      				<button class="btn btn-lg btn-primary btn-block" type="submit">Posalji</button>
+      				<button class="btn btn-lg btn-primary btn-block" id="submitNovoVozilo" type="submit">Posalji</button>
 
 				</form>
 			</div>
@@ -851,5 +953,331 @@
 <!-- /Vozilo Modal -->    
     <!-- Restoran detaljno -->
     <!-- /Restoran detaljno -->
+<!--Izmena restorana Modal -->
+<div class="modal fade" id="modalEditRestoran" tabindex="-1" role="dialog" aria-labelledby="modalRestoranTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+         		<h3 class="text-center">Izmena restorana</h3>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+       			 </button>
+			</div>
+      		<div class="modal-body">
+ 	    		<form id="formEditRestoran" class="form-horizontal" role="form" action="/restaurant"   >
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="idEditRest"  name="id" >
+  					</div>
+					<div class="form-group">
+						<label for="inputEditRestIme">Naziv</label>
+						<input type="text" class="form-control" pattern="^[A-Z0-9].[A-Za-z0-9\s]{0,30}" title="2-30 karaktera" id="inputEditRestIme"  name="name" placeholder="Unesite naziv" required>
+  					</div>
+					<div class="form-group">
+    					<label for="inputEditRestAdresa">Adresa</label>
+    					<input type="text" class="form-control" pattern="^[A-Z].[A-Za-z0-9\s]{0,30}" title="2-30 karaktera" id="inputEditRestAdresa" name="address" placeholder="Unesite adresu" required>
+  					</div>
+  					<div class="form-group">
+					    <label for="selectEditKategRest">Kategorija restorana</label>
+					    <select class="form-control" id="selectEditKategRest" name="restCateg">
+					      <option value="0">Domaca kuhinja</option>
+					      <option value="1">Rostilj</option>
+					      <option value="2">Kineski restoran</option>
+					      <option value="3">Indijski restoran</option>
+					      <option value="4">Poslasticarnica</option>
+					      <option value="5">Picerija</option>
+					    </select>
+					</div>
+				  	<p id="inputEditRestError" style="color:red;"></p>
+					<br>
+      				<button class="btn btn-lg btn-primary btn-block" type="submit" id="submitEditRestoran" type="button">Izmeni</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!--/Izmena restorana Modal -->
+<!-- Izmena artikla Modal -->
+<div class="modal fade" id="modalEditArtikal" tabindex="-1" role="dialog" aria-labelledby="modalArtikalTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+         		<h3 class="text-center">Izmena artikla</h3>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+       			 </button>
+			</div>
+      		<div class="modal-body">
+ 	    		<form id="formEditArtikal" class="form-horizontal" action="/item" role="form" >
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="idEditItem"  name="id" >
+  					</div>
+					<div class="form-group">
+						<label for="inputNazivArt">Naziv</label>
+						<input type="text" class="form-control"  pattern="([A-Z0-9][a-z0-9]{0,30})" title="2-30 karaktera" id="inputEditNazivArt"  name="name" placeholder="Unesite naziv" required>
+  					</div>
+					<div class="form-group">
+    					<label for="inputEditOpisArt">Opis</label>
+    					<input type="text" class="form-control" min="1" max="200" title="2-100 karaktera"  id="inputEditOpisArt" name="description" placeholder="Unesite opis" required>
+  					</div>
+  					<div class="form-group">
+    					<label for="inputEditCenaArt">Cena</label>
+    					<input type="number" class="form-control" min="1" max="10000" id="inputEditCenaArt" name="price" placeholder="Unesite cenu" required>
+  					</div>
+  					<div class="form-group">
+					    <label for="selectEditKategArt">Tip artikla</label>
+					    <select class="form-control" name="itemType" id="selectEditKategArt">
+					      <option value="0">Jelo</option>
+					      <option value="1">Pice</option>
+					    </select>
+					</div>
+					<div class="form-group">
+					    <label for="selectEditRestaurant">Restoran</label>
+					    <select class="form-control" name="restaurantId" id="selectEditRestaurantId">
+					      		
+					    </select>
+					</div>
+  					<div class="form-group">
+    					<label for="inputEditKolArt">Kolicina</label>
+    					<input type="number" class="form-control" min="1" max="10000" id="inputEditKolArt" name="quantity" placeholder="Unesite kolicinu" required>
+  					</div>
+				  	<p id="inputEditArtikalError" style="color:red;"></p>
+					<br>
+      				<button class="btn btn-lg btn-primary btn-block" id="submitEditArtikal" type="submit" >Izmeni</button>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Izmenar atikla Modal -->
+<!-- Izmena vozila Modal -->
+<div class="modal fade" id="modalEditVozilo" tabindex="-1" role="dialog" aria-labelledby="modalVoziloTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+         		<h3 class="text-center">Izmena vozila</h3>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+       			 </button>
+			</div>
+      		<div class="modal-body">
+ 	    		<form id="formEditVozilo" class="form-horizontal" action="/vehicle"  role="form" >
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="idEditVehicle"  name="id" >
+  					</div>
+					<div class="form-group">
+						<label for="inputEditVozMarka">Marka</label>
+						<input type="text" class="form-control" pattern="([A-Z0-9][a-z0-9]{0,30})" title="2-30 karaktera" id="inputEditVozMarka"  name="brand" placeholder="Unesite marku vozila" required>
+  					</div>
+					<div class="form-group">
+    					<label for="inputEditVozModel">Model</label>
+    					<input type="text" class="form-control" pattern="([A-Z0-9][a-z0-9]{0,30})" title="2-30 karaktera"  id="inputEditVozModel" name="model" placeholder="Unesite model vozila" required>
+  					</div>
+  					<div class="form-group">
+    					<label for="inputEditGodVoz">Godiste</label>
+    					<input type="number" class="form-control" min="1930" max="2018" id="inputEditGodVoz" name="productionYear" placeholder="Unesite godinu proizvodnje" required>
+  					</div>
+  					<div class="form-group">
+					    <label for="selectEditTipVoz">Tip vozila</label>
+					    <select class="form-control" name='vehicleType' id="selectEditTipVoz">
+					      <option value="0">Bicikl</option>
+					      <option value="1">Skuter</option>
+					      <option value="2">Automobil</option>
+					    </select>
+					</div>
+					<div class="form-group">
+    					<label for="inputEditRegVoz">Registarski broj</label>
+    					<input type="text" class="form-control" pattern="[A-Za-z0-9\s]{0,30}" title="Primer: NS123AB Za bicikl unestite bilo sta." id="inputEditRegVoz" name="numberPlate" placeholder="Unesite registraciju vozila" required>
+  					</div>
+  					<div class="form-group">
+					  <label for="inputEditNapVoz">Napomena</label>
+					  <textarea id="inputEditNapVoz" class="form-control" name='note' aria-label="With textarea"></textarea>
+					</div>
+					<p id="inputEditVozError" style="color:red;"></p>
+					<br>
+      				<button class="btn btn-lg btn-primary btn-block" id="submitEditNovoVozilo" type="submit">Izmeni vozilo</button>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Izmena vozila Modal -->
+<!-- Izmena korisnika Modal -->
+<div class="modal fade" id="modalEditKorisnik" tabindex="-1" role="dialog" aria-labelledby="modalKorisnikTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+         		<h3 class="text-center">Izmena korisnika</h3>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+       			 </button>
+			</div>
+      		<div class="modal-body">
+ 	    		<form id="formEditKorisnik" class="form-horizontal" action="/user"  role="form" >
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="idEditUser"  name="id" >
+  					</div>
+					<div class="form-group">
+						<label for="inputEditfirstName">Ime</label>
+						<input type="text" class="form-control" pattern="([A-Z][a-z]{2,20})" title="3-20 karaktera" id="inputEditfirstName"  name="firstName" placeholder="Unesite ime " required>
+  					</div>
+					<div class="form-group">
+    					<label for="inputEditVlastName">Prezime</label>
+    					<input type="text" class="form-control" pattern="([A-Z][a-z]{2,20})" title="3-20 karaktera" id="inputEditlastName" name="lastName" placeholder="Unesite prezime korisnika">
+  					</div>
+  					<div class="form-group">
+					    <label for="selectEditUserRole">Tip korisnika</label>
+					    <select class="form-control" name='role' id="selectEditUserRole">
+					      <option value="0">Kupac</option>
+					      <option value="1">Admin</option>
+					      <option value="2">Dostavljac</option>
+					    </select>
+					</div>
+					<p id="inputEditUserError" style="color:red;"></p>
+					<br>
+      				<button class="btn btn-lg btn-primary btn-block" id="submitEditKorisnik" type="submit">Izmeni korisnika</button>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Ponuda Modal -->
+<div class="modal fade" id="modalPonuda" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalKorisnikTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+         		<h3 class="text-center" id="ponudaRestName"></h3>
+			</div>
+      		<div class="modal-body modalProba"  >
+		     	<table class="table table-sm" >
+					<thead>
+						<tr>
+							<th>Naziv</th>
+						    <th>Opis</th>
+						    <th>Cena</th>
+						    <th>Kolicina</th>
+						    <th>Porcija</th>
+							<th></th>
+						</tr>
+					</thead>	    						  
+					 <tbody id="ponudaRest">
+						
+				</table>
+		     </div>
+		     <div class="container-fluid">
+				    <div class="row">
+				      <div class="col-md-6">
+				      	<div class="form-group">
+					 	 <label for="inputNapNar">Napomena:</label>
+					 	 <textarea id="inputNapNar" class="form-control" name='note' aria-label="With textarea" placeholder="Unesite napomenu"></textarea>
+						</div>
+						<div class="form-group">
+    					<label for="inputOrdAddr">Adresa:</label>
+    					<input type="text" class="form-control" id="inputOrdAddr" name="address" placeholder="Unesite adresu isporuke">
+  					<p id="errorOrder" style="color:red;"></p>
+  					</div>
+				      </div>
+				      <div class="col-md-6  ml-auto">
+				      <table class="table table-sm">
+					<tr>
+						<td>Kuponi:</td>
+						<td id="userPoints">0</td>
+					</tr>
+					<tr>
+						<td>Popust:</td>
+						<td>
+						<div class="input-group input-group-sm">
+							  <input  id="usedPoints"type="number" value="0" min="0" max="10" disabled>
+						</div>
+						</td>
+						<td>
+						    <button type="button" class="btn btn-success btn-sm incBonusBtn" >	&#43;</button>
+							<button type="button" class="btn btn-danger btn-sm decBonusBtn" >&#8722;</button>
+						</td>
+						<td><label id="discount"></label></td>
+					</tr>
+					<tr>
+						<td>Cena:</td>
+						<td id="totalPrice">0</td>
+						<td >RSD</td>
+					</tr>
+					<tr>
+						<td>Cena sa popustom:</td>
+						<td id="discountPrice">0</td>
+						<td >RSD</td>
+					</tr>
+				</table>
+						</div>
+				    </div>
+				  </div>
+
+		    <div class="modal-footer">
+			     
+					<button type="button" class="btn btn-primary btn-sm " id="sendOrder">Naruci</button>
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" id="cancelOrder">Odustani</button>
+					
+					
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Vozila Modal -->
+<div class="modal fade" id="modalDostavVozila" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalDostavVozila" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+         		<h5 class="text-center" >Izaberite vozilo za dostavu.</h5>
+			</div>
+      		<div class="modal-body modalProba"  >
+      			
+      			<table class="table table-sm">
+		  				<thead>
+		  					<tr>
+								<th>Marka</th>
+							    <th>Model</th>
+							    <th>Reg. Ozn.</th>
+							    <th>Godina Proiz.</th>
+							    <th>Tip voz.</th>
+							    <th>Status</th>
+							    <th>Napomena</th>
+							    <th></th>
+							</tr>
+						</thead>
+						<tbody id='deliveryVehicleTable'>				    	    
+							
+						</tbody>
+					</table>
+		    </div>
+
+		    <div class="modal-footer">
+			     	<input type="hidden" id="orderId">
+					<button type="button" class="btn btn-primary btn-sm " id="acceptVehicleAndOrder">Izaberi</button>
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" >Odustani</button>	
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Alert Modal -->
+<div class="modal fade" id="alertModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="alertTitle"></h4>
+			</div>
+			<div class="modal-body alertModalBody" id="alertModalBody"  >
+					<h5 id="alertMessage"></h5>
+			</div>		      
+		<div class="modal-footer  ">
+			<button type="button" class="btn btn-success alertOk " id="alertBtnOk">Ok</button>
+			<button type="button" class="btn btn-default  alertClose" data-dismiss="modal" id="alertBtnCancel" >Zatvori</button>		    
+		</div>
+		</div>
+	</div>
+</div>
+<!-- /Izmena korisnika Modal -->    
+    
 </body>
 </html>

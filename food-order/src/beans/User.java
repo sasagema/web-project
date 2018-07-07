@@ -5,14 +5,11 @@ import java.util.List;
 
 import enums.Role;
 
-public class User implements Serializable {
+public class User  {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	
-	private Long id;
+	private String id;
 	private String firstName;
 	private String lastName;
 	private String username;
@@ -23,17 +20,18 @@ public class User implements Serializable {
 	private Role role;
 	private boolean deleted;
 	private int discountPoints;
-	
+	private Vehicle vehicle;
 	
 	private List<Order> orders;
 	private List<Vehicle> vehicles;	
 	private List<Restaurant> favoriteRest;
+	private List<Order> deliveryOrders;
 	
 	public User() {
 		super();
 	}
 
-	public User(Long id, String firstName, String lastName, String username, String password, String telephone,
+	public User(String id, String firstName, String lastName, String username, String password, String telephone,
 			String email, String registrDate, Role role, boolean deleted, int discountPoints, List<Order> orders,
 			List<Vehicle> vehicles, List<Restaurant> favoriteRest) {
 		super();
@@ -53,11 +51,11 @@ public class User implements Serializable {
 		this.favoriteRest = favoriteRest;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -165,9 +163,6 @@ public class User implements Serializable {
 		this.favoriteRest = favoriteRest;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public String toString() {
@@ -175,6 +170,22 @@ public class User implements Serializable {
 				+ ", password=" + password + ", telephone=" + telephone + ", email=" + email + ", registrDate="
 				+ registrDate + ", role=" + role + ", deleted=" + deleted + ", discountPoints=" + discountPoints
 				+ ", orders=" + orders + ", vehicles=" + vehicles + ", favoriteRest=" + favoriteRest + "]";
+	}
+
+	public List<Order> getDeliveryOrders() {
+		return deliveryOrders;
+	}
+
+	public void setDeliveryOrders(List<Order> deliveryOders) {
+		this.deliveryOrders = deliveryOders;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 	
 	
